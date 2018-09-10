@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" 
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+
+	<package name="iTamPack" extends="struts-default">
+		<action name="getAllTams" class="com.shaeed.itam.business.GetAllTams">
+			<result name="success">/tams.jsp</result>
+			<result name="error">/error.jsp</result>
+			<result name="successb">/tamsb.jsp</result>
+			<result name="errorb">/error.jsp</result>
+		</action>
+		<action name="openTam" class="com.shaeed.itam.business.OpenTam">
+			<result name="success">/tam.jsp</result>
+			<result name="successb">/tamb.jsp</result>
+			<result name="error">/error.jsp</result>
+			<result name="errorb">/error.jsp</result>
+		</action>
+		<action name="redirectAddTam" class="com.shaeed.itam.business.Redirecter">
+			<result name="success">/addtam.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="addTam" class="com.shaeed.itam.business.AddTam">
+			<result name="success" type="redirect">
+				<param name="location">manageTam</param>
+				<param name="tamId">${tamId}</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="manageTam" class="com.shaeed.itam.business.ManageAttendee" method="display">
+			<result name="success">/managetam.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deleteAttendee" class="com.shaeed.itam.business.ManageAttendee" method="delete">
+			<result name="success" type="redirect">
+				<param name="location">manageTam</param>
+				<param name="message">${message}</param>
+				<param name="tamId">${tamId}</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="deactivateTam" class="com.shaeed.itam.business.ManageTam" method="deactivate">
+			<result name="success">/managetam.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="addAttendee" class="com.shaeed.itam.business.AddAttendee">
+			<result name="success" type="redirect">
+				<param name="location">manageTam</param>
+				<param name="message">${message}</param>
+				<param name="tamId">${tamId}</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="addActivity" class="com.shaeed.itam.business.AddActivity">
+			<result name="openTamKey" type="redirect">openTam#key-act-tab</result>
+			<result name="openTamImpr" type="redirect">openTam#imprv-idea-tab</result>
+			<result name="openTamAndOn" type="redirect">openTam#and-on-tab</result>
+			<result name="openTamTask" type="redirect">openTam#task-tab</result>
+			<result name="openTamInfo" type="redirect">openTam#info-tab</result>
+			<result name="error">/error.jsp</result>
+			<result name="openTamKeyb" type="redirect">openTamb#key-act-tab</result>
+			<result name="openTamImprb" type="redirect">openTamb#imprv-idea-tab</result>
+			<result name="openTamAndOnb" type="redirect">openTamb#and-on-tab</result>
+			<result name="openTamTaskb" type="redirect">openTamb#task-tab</result>
+			<result name="openTamInfob" type="redirect">openTamb#info-tab</result>
+			<result name="errorb">/error.jsp</result>
+		</action>
+	</package>
+
+	<package name="iTamJsonPack" extends="json-default">
+		<action name="saveActivity" class="com.shaeed.itam.business.SaveActivity">
+			<result name="success" type="json">/tam.jsp</result>
+			<result name="error" type="json">/tam.jsp</result>
+			<result name="successb" type="json">/tamb.jsp</result>
+			<result name="errorb" type="json">/tamb.jsp</result>
+		</action>
+		<action name="saveActivityComplete" class="com.shaeed.itam.business.SaveActivity" method="completedButton">
+			<result name="success" type="json">/tam.jsp</result>
+			<result name="error" type="json">/error.jsp</result>
+			<result name="successb" type="json">/tamb.jsp</result>
+			<result name="errorb" type="json">/error.jsp</result>
+		</action>
+		<action name="updateAttendee" class="com.shaeed.itam.business.ManageAttendee" method="update">
+			<result name="success" type="json">/managetam.jsp</result>
+			<result name="error" type="json">/error.jsp</result>
+		</action>
+		<action name="updateTam" class="com.shaeed.itam.business.ManageTam" method="update">
+			<result name="success" type="json">/managetam.jsp</result>
+			<result name="error" type="json">/error.jsp</result>
+		</action>
+		<action name="getOldActivity" class="com.shaeed.itam.business.ActivityHistory" method="execute">
+			<result name="success" type="json">/tam.jsp</result>
+			<result name="error" type="json">/error.jsp</result>
+			<result name="successb" type="json">/tamb.jsp</result>
+			<result name="errorb" type="json">/error.jsp</result>
+		</action>
+
+		<action name="ajaxTest" class="com.shaeed.itam.business.Test">
+			<result name="success" type="json">/index.jsp</result>
+			<result name="error" type="json">/index.jsp</result>
+		</action>
+	</package>
+</struts>
